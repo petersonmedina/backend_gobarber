@@ -1,5 +1,5 @@
 import { Router } from 'express';
-
+import { classToClass } from 'class-transformer';
 import CreateUserService from '../services/CreateUserService';
 
 const usersRouter = Router();
@@ -16,7 +16,7 @@ usersRouter.post('/', async (request, response) => {
       password,
     });
 
-    return response.json(user);
+    return response.json({ user: classToClass(user) });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
