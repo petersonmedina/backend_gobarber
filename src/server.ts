@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 import routes from './routes';
 import uploadConfig from './config/upload';
@@ -9,6 +10,7 @@ import AppError from './error/AppError';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
